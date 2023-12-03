@@ -14,11 +14,43 @@
           <li class="nav-item">
             <router-link to="/my-list" class="nav-link">Minha Lista</router-link>
           </li>
-          <li class="nav-item">
-            <router-link to="/players" class="nav-link">Logout</router-link>
+          <li v-if="isAuthenticated" class="nav-item">
+            <router-link @click="logout" to="/login" class="nav-link">Logout</router-link>
           </li>
+          <li v-if="!isAuthenticated" class="nav-item">
+            <router-link to="/login" class="nav-link">Login</router-link>
+          </li>
+          <li v-if="!isAuthenticated" class="nav-item">
+          <router-link to="/register" class="nav-link">Registrar</router-link>
+        </li>
         </ul>
       </div>
     </div>
   </nav>
 </template>
+
+<script>
+import { getAPI } from '../../api-axios.js';
+
+export default {
+  data() {
+    return {
+      isAuthenticated: localStorage.getItem('isAuth') === 'true',
+    };
+  },
+  methods: {
+    logout() {
+      getAPI.post('core/user/')
+        .then(response => {
+          localStorage.removeItem('token');
+          localStorage.removeItem('isAuth');
+          this.isAuthenticated = false;
+          this.$router.push('/login');
+        })
+        .catch(error => {
+          console.error('Erro ao fazer logout:', error);
+        });
+    }
+  },
+};
+</script>

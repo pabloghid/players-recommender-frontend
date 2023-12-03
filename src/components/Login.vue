@@ -1,11 +1,14 @@
 <template>
     <div>
         <h2>Login</h2>
+        <div v-if="registrationSuccess">
+            Usuário registrado com sucesso!
+        </div>
         <form @submit.prevent="submitForm">
-            <label for="username">Username:</label>
+            <label for="username">Usuário:</label>
             <input type="text" v-model="username" required />
             <br />
-            <label for="password">Password:</label>
+            <label for="password">Senha:</label>
             <input type="password" v-model="password" required />
             <br />
             <button type="submit">Login</button>
@@ -21,7 +24,8 @@ export default {
     data() {
         return {
             username: '',
-            password: ''
+            password: '',
+            registrationSuccess: false,
         }
     },
     methods: {
@@ -37,14 +41,21 @@ export default {
                     const token = response.data.token;
                     localStorage.setItem('token', token);
                     localStorage.setItem('isAuth', true)
-                    console.log(localStorage)
-                    this.$router.push('/players')
+                    localStorage.setItem('loginSuccess', 'true');
+                    this.$router.push('/player-recommender')
                 })
                 .catch(error => {
                     console.log(error)
                 })
         }
-    }
+    },
+    created() {
+        const registrationSuccess = localStorage.getItem('registrationSuccess');
+        if (registrationSuccess === 'true') {
+            this.registrationSuccess = true;
+            localStorage.removeItem('registrationSuccess');
+        }
+    },
 };
 </script>
   

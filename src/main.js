@@ -5,20 +5,35 @@ import { createRouter, createWebHistory } from 'vue-router';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 
+const routes = [
+  { path: '/login', component: () => import('./components/Login.vue') },
+  { path: '/register', component: () => import('./components/Register.vue') },
+  { path: '/player-recommender', component: () => import('./components/PlayerRecommender.vue'), meta: { requiresAuth: true } },
+  { path: '/players', component: () => import('./components/PlayerList.vue'), meta: { requiresAuth: true }},
+  { 
+    path: '/player/:id',
+    name: 'PlayerDetails', 
+    component: () => import('./components/PlayerDetails.vue'),
+    props: true,
+    meta: { requiresAuth: true }
+  },
+]
 const router = createRouter({
   history: createWebHistory(),
-  routes: [
-    { path: '/login', component: () => import('./components/Login.vue') },
-    { path: '/sign-up', component: () => import('./components/Register.vue') },
-    { path: '/player-recommender', component: () => import('./components/PlayerRecommender.vue') },
-    { path: '/players', component: () => import('./components/PlayerList.vue') },
-    { 
-      path: '/player/:id',
-      name: 'PlayerDetails', 
-      component: () => import('./components/PlayerDetails.vue'),
-      props: true 
-    },
-  ],
+  routes
+});
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    const isAuth = localStorage.getItem('isAuth');
+    if (!isAuth) {
+      next('/login');
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
 });
 
 const app = createApp(App);
