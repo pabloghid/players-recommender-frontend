@@ -3,17 +3,20 @@
     <NavbarComponent />
   </div>
   <div id="app">
-    <router-view></router-view>
+    <div class="container mt-4">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
 <script>
 import NavbarComponent from './components/NavbarComponent.vue';
+
 export default {
   name: 'App',
   components: {
-      NavbarComponent,
-    }
+    NavbarComponent,
+  }
 }
 </script>
 

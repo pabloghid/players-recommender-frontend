@@ -8,7 +8,10 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 const router = createRouter({
   history: createWebHistory(),
   routes: [
-    { path: '/', component: () => import('./components/PlayerList.vue') },
+    { path: '/login', component: () => import('./components/Login.vue') },
+    { path: '/sign-up', component: () => import('./components/Register.vue') },
+    { path: '/player-recommender', component: () => import('./components/PlayerRecommender.vue') },
+    { path: '/players', component: () => import('./components/PlayerList.vue') },
     { 
       path: '/player/:id',
       name: 'PlayerDetails', 

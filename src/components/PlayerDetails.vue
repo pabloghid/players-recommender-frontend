@@ -46,10 +46,11 @@
                                 <p class="card-text">Chutes ao gol: {{ playerDetails.Shots_On }}</p>
                                 <p class="card-text">Chutes/jogo: {{ playerDetails.Shots }}</p>
                                 <p class="card-text">Chutes ao gol/jogo: {{ playerDetails.ShotsOnTarget }}</p>
-                                <p class="card-text">Porcentagem de chutes ao gol: {{ playerDetails.ShotsOnTarget_Percentage }}%</p>
+                                <p class="card-text">Porcentagem de chutes ao gol: {{ playerDetails.ShotsOnTarget_Percentage
+                                }}%</p>
                                 <p class="card-text">Gols/chute: {{ playerDetails.Goals_Shot }}</p>
                                 <p class="card-text">Gols/chutes ao gol: {{ playerDetails.Goals_ShotsOnTarget }}</p>
-                                
+
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -61,12 +62,14 @@
                                 <p class="card-text">Interceptações/jogo: {{ playerDetails.Interceptations }}</p>
                                 <p class="card-text">Desarmes: {{ playerDetails.Tackled_Total }}</p>
                                 <p class="card-text">Desarmes/jogo: {{ playerDetails.Tackles }}</p>
-                                <p class="card-text">Desarmes e interceptações/jogo: {{ playerDetails.Tackles_Interceptations }}</p>
+                                <p class="card-text">Desarmes e interceptações/jogo: {{
+                                    playerDetails.Tackles_Interceptations }}</p>
                                 <p class="card-text">Duelos ganhos: {{ playerDetails.Duels_Won }}</p>
                                 <p class="card-text">Total de duelos: {{ playerDetails.Duels_Total }}</p>
-                                <p class="card-text">Porcentagem de duelos ganhos: {{ playerDetails.Duels_Won_Percentage }}%</p>
+                                <p class="card-text">Porcentagem de duelos ganhos: {{ playerDetails.Duels_Won_Percentage }}%
+                                </p>
                                 <p class="card-text">Faltas cometidas: {{ playerDetails.Fouls_Committed }}</p>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -83,7 +86,8 @@
                                 <p class="card-text">Passes/jogo: {{ playerDetails.Passes_Total_n }}</p>
                                 <p class="card-text">Dribles tentados: {{ playerDetails.Dribbles_Attempts }}</p>
                                 <p class="card-text">Dribles completos: {{ playerDetails.Dribbles_Success }}</p>
-                                <p class="card-text">Porcentagem de dribles completos: {{ playerDetails.Dribbles_Success_Percentage }}%</p>
+                                <p class="card-text">Porcentagem de dribles completos: {{
+                                    playerDetails.Dribbles_Success_Percentage }}%</p>
                                 <p class="card-text">Faltas recebidas: {{ playerDetails.Fouls_Drawn }}</p>
                             </div>
                         </div>
@@ -115,14 +119,13 @@ export default {
         };
     },
     mounted() {
-        // Obtendo o playerId da URL usando this.$route.params
         this.playerId = this.$route.params.id;
         this.fetchPlayerDetails();
     },
     methods: {
         async fetchPlayerDetails() {
             try {
-                const response = await getAPI.get(`core/api/players/${this.playerId}`);
+                const response = await getAPI.get(`core/players/${this.playerId}`);
                 this.playerDetails = response.data;
                 console.log(this.playerDetails)
             } catch (error) {
