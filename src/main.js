@@ -17,6 +17,7 @@ const routes = [
     props: true,
     meta: { requiresAuth: true }
   },
+  { path: '/my-list', component: () => import('./components/FavoritePlayers.vue'), meta: { requiresAuth: true }},
 ]
 const router = createRouter({
   history: createWebHistory(),

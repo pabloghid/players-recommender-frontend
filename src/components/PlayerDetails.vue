@@ -13,8 +13,11 @@
                         </p>
                     </div>
                 </div>
-                <button class="btn btn-primary">
+                <button class="btn btn-primary" v-if="!isPlayerInFavorites" @click="addToFavorites">
                     Adicionar a sua lista
+                </button>
+                <button class="btn btn-primary" v-if="isPlayerInFavorites" :disabled="isPlayerInFavorites">
+                    Jogador na lista
                 </button>
             </div>
             <div class="col-md-8">
@@ -115,7 +118,9 @@ export default {
     data() {
         return {
             playerId: null,
-            playerDetails: null
+            playerDetails: null,
+            isPlayerInFavorites: false,
+            isCheckingFavorites: false,
         };
     },
     mounted() {
@@ -127,11 +132,32 @@ export default {
             try {
                 const response = await getAPI.get(`core/players/${this.playerId}`);
                 this.playerDetails = response.data;
-                console.log(this.playerDetails)
+
+                this.checkIfPlayerInFavorites();
             } catch (error) {
-                console.error('Erro ao buscar detalhes do jogador:', error);
+                console.error('Erro: ', error);
             }
-        }
+        },
+        async addToFavorites() {
+            try {
+                await getAPI.post('core/player-list/', { player_id: this.playerId });
+
+                this.isPlayerInFavorites = true;
+            } catch (error) {
+                console.error('Erro: ', error);
+            }
+        },
+        async checkIfPlayerInFavorites() {
+            try {
+                this.isCheckingFavorites = true;
+                const response = await getAPI.get(`core/is-player-in-favorites/${this.playerId}`);
+                this.isPlayerInFavorites = response.data.is_in_favorites;
+            } catch (error) {
+                console.error('Erro: ', error);
+            } finally {
+                this.isCheckingFavorites = false;
+            }
+        },
     }
 }
 </script>
