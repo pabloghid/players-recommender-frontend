@@ -32,6 +32,7 @@
           <div v-for="similar_player in similarPlayers" :key="similar_player.id"
             class="comment mt-4 text-justify float-left">
             <a class="list-group-item" :href="'/player/' + similar_player.id">
+              <img :src="similar_player.photo" alt="" class="rounded-circle" width="40" height="40">
               <h5>{{ similar_player.name }}</h5>
               <span>Equipe: {{ similar_player.team }}</span>
             </a>
