@@ -16,7 +16,7 @@
                             <label for="password" class="form-label">Senha:</label>
                             <input class='form-control' type="password" v-model="password" required />
                         </div>
-                        <button class="btn btn-dark w-100" type="submit">Login</button>
+                        <button class="btn btn-dark w-100" type="submit">Registrar</button>
                     </form>
                     <div v-if="errorMessages.length > 0" class="alert alert-danger">
                         <ul class="mb-0">
