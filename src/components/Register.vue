@@ -1,26 +1,35 @@
 <template>
-    <div>
-        <h2>Registrar</h2>
-        <form @submit.prevent="submitForm">
-            <label for="username">Usuário:</label>
-            <input type="text" v-model="username" required />
-            <br />
-            <label for="password">Senha:</label>
-            <input type="password" v-model="password" required />
-            <br />
-            <label for="email">Endereço de email:</label>
-            <input type="email" v-model="email" required />
-            <br />
-            <button type="submit">Registrar</button>
-
-            <div v-if="errorMessages.length > 0">
-                <ul>
-                    <li v-for="errorMessage in errorMessages" :key="errorMessage">{{ errorMessage }}</li>
-                </ul>
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-6">
+            <div class="card px-5 py-5" style="background-color: rgb(225, 236, 236);">
+                <div class="form-data">
+                    <form @submit.prevent="submitForm" class="forms-inputs mb-4" style="text-align: start;">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Usuário:</label>
+                            <input class='form-control' type="text" v-model="username" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Endereço de email:</label>
+                            <input class='form-control' type="email" v-model="email" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Senha:</label>
+                            <input class='form-control' type="password" v-model="password" required />
+                        </div>
+                        <button class="btn btn-dark w-100" type="submit">Login</button>
+                    </form>
+                    <div v-if="errorMessages.length > 0" class="alert alert-danger">
+                        <ul class="mb-0">
+                            <li v-for="errorMessage in errorMessages" :key="errorMessage">{{ errorMessage }}</li>
+                        </ul>
+                    </div>
+                </div>
             </div>
-        </form>
+
+        </div>
     </div>
 </template>
+
   
 <script>
 import { getAPI } from '../../api-axios.js';
@@ -42,7 +51,7 @@ export default {
                 password: this.password,
                 email: this.email
             };
-            
+
             this.errorMessages = [];
 
             getAPI

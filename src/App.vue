@@ -27,5 +27,22 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  background-color: rgb(184, 206, 206);
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  background-color: rgb(99, 143, 143);
+  display: flex;
+  flex-direction: column;
+}
+
+#app {
+  flex: 1;
 }
 </style>

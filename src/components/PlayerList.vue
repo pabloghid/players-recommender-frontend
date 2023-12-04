@@ -1,12 +1,33 @@
 <template>
-  <div>
-    <h1>Lista de Jogadores</h1>
-    <input v-model="searchTerm" class="form-control" placeholder="Comece a digitar para buscar jogadores">
-    <ul v-if="showList" class="list-group">
-      <a v-for="player in filtered_players" :key="player.Id" :href="'/player/' + player.Id" class="list-group-item">
-        {{ player.Name }} - {{ player.Team }}
-      </a>
-    </ul>
+  <div class="card">
+    <div class="card-header">
+      <h2>Lista de Jogadores</h2>
+    </div>
+    <div class="card-body">
+      <div class="row">
+        <div class="col-12">
+          <div class="form-group">
+            <label for="searchTerm" style="display: block; text-align: left;" class="form-label">Buscar jogador:</label>
+            <input v-model="searchTerm" id="searchTerm" class="form-control"
+              placeholder="Comece a digitar para buscar jogadores">
+          </div>
+        </div>
+      </div>
+
+      <div v-if="showList" class="row">
+        <div class="col-12">
+          <div v-for="player in filtered_players" :key="player.Id" 
+          class="comment mt-4 text-justify float-left">
+            <a class="list-group-item" :href="'/player/' + player.Id">
+              <img :src="player.player_photo" alt="" class="rounded-circle" width="40" height="40">
+              <h5>{{ player.Name }}</h5>
+              <span>Equipe: {{ player.Team }}</span>
+            </a>
+            <hr v-if="player">
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 

@@ -1,18 +1,25 @@
 <template>
-    <div>
-        <h2>Login</h2>
-        <div v-if="registrationSuccess">
-            Usuário registrado com sucesso!
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-6">
+            <div class="card px-5 py-5" style="background-color: rgb(225, 236, 236);">
+                <div class="form-data">
+                    <div v-if="registrationSuccess" class="alert alert-success mb-1">
+                        Usuário registrado com sucesso!
+                    </div>
+                    <form @submit.prevent="submitForm" class="forms-inputs mb-4" style="text-align: start;">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Usuário:</label>
+                            <input class='form-control' type="text" v-model="username" required />
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Senha:</label>
+                            <input class='form-control' type="password" v-model="password" required />
+                        </div>
+                        <button class="btn btn-dark w-100" type="submit">Login</button>
+                    </form>
+                </div>
+            </div>
         </div>
-        <form @submit.prevent="submitForm">
-            <label for="username">Usuário:</label>
-            <input type="text" v-model="username" required />
-            <br />
-            <label for="password">Senha:</label>
-            <input type="password" v-model="password" required />
-            <br />
-            <button type="submit">Login</button>
-        </form>
     </div>
 </template>
   
@@ -47,7 +54,7 @@ export default {
                 .catch(error => {
                     console.log(error)
                 })
-        }
+        },
     },
     created() {
         const registrationSuccess = localStorage.getItem('registrationSuccess');
@@ -58,4 +65,3 @@ export default {
     },
 };
 </script>
-  

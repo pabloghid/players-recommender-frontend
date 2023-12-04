@@ -1,33 +1,45 @@
 <template>
-  <div v-if="loginSuccess">
+  <div v-if="loginSuccess" class="alert alert-success mb-1">
     Bem vindo, {{ username }}!
   </div>
-  <h1>Recomendador de Jogadores</h1>
-  <div class="mb-3">
-    <div class="row">
-      <div class="col-md-6">
-        <label for="teamFilter" class="form-label">Filtrar por time:</label>
-        <input type="text" class="form-control" id="teamFilter" v-model="filterTeam" @input="filterPlayers"
-          placeholder="Insira o nome do time" />
+  <div class="card">
+    <div class="card-header">
+      <h2>Recomendador de Jogadores</h2>
+    </div>
+    <div class="card-body">
+      <div class="mb-3">
+        <div class="row">
+          <div class="col-md-6">
+            <label for="teamFilter" class="form-label">Filtrar por time:</label>
+            <input type="text" class="form-control" id="teamFilter" v-model="filterTeam" @input="filterPlayers"
+              placeholder="Insira o nome do time" />
+          </div>
+          <div class="col-md-6">
+            <label for="selectPlayer" class="form-label">Selecione um jogador:</label>
+            <select v-model="selectedPlayer" @change="playerSelected" class="form-select" id="selectPlayer">
+              <option v-for="player in filteredPlayers" :key="player.Id" :value="player">
+                {{ player.Name }} - {{ player.Team }}
+              </option>
+            </select>
+          </div>
+        </div>
       </div>
-      <div class="col-md-6">
-        <label for="selectPlayer" class="form-label">Selecione um jogador:</label>
-        <select v-model="selectedPlayer" @change="playerSelected" class="form-select" id="selectPlayer">
-          <option v-for="player in filteredPlayers" :key="player.Id" :value="player">
-            {{ player.Name }} - {{ player.Team }}
-          </option>
-        </select>
+
+      <div v-if="similarPlayers.length > 0" class="row">
+        <div class="col-12 pb-4">
+          <h2>Jogadores similares</h2>
+          <hr>
+          <div v-for="similar_player in similarPlayers" :key="similar_player.id"
+            class="comment mt-4 text-justify float-left">
+            <a class="list-group-item" :href="'/player/' + similar_player.id">
+              <h5>{{ similar_player.name }}</h5>
+              <span>Equipe: {{ similar_player.team }}</span>
+            </a>
+            <hr v-if="similarPlayers.length - 1 > 0">
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-  <div v-if="similarPlayers.length > 0">
-    <h2>Jogadores similares</h2>
-    <ul class="list-group">
-      <a v-for="similar_player in similarPlayers" :key="similar_player.id" class="list-group-item"
-        :href="'/player/' + similar_player.id">
-        {{ similar_player.name }} - {{ similar_player.team }}
-      </a>
-    </ul>
   </div>
 </template>
   
