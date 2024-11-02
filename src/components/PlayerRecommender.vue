@@ -35,11 +35,42 @@
               <img :src="similar_player.photo" alt="" class="rounded-circle" width="40" height="40">
               <h5>{{ similar_player.name }}</h5>
               <span>Equipe: {{ similar_player.team }}</span>
+
+        <router-link 
+          v-if="selectedPlayer && similarPlayers.length > 0" 
+          :to="{ 
+            name: 'PlayerComparison', 
+            params: { 
+              playerId1: selectedPlayer.Id, 
+              playerId2: similarPlayers[0].id 
+            } 
+          }" 
+          class="btn btn-primary"
+        >
+          Comparar Jogadores
+        </router-link>
             </a>
             <hr v-if="similarPlayers.length - 1 > 0">
           </div>
         </div>
       </div>
+
+      <div class="mt-4">
+        <router-link 
+          v-if="selectedPlayer && similarPlayers.length > 0" 
+          :to="{ 
+            name: 'PlayerComparison', 
+            params: { 
+              playerId1: selectedPlayer.Id, 
+              playerId2: similarPlayers[0].id 
+            } 
+          }" 
+          class="btn btn-primary"
+        >
+          Comparar Jogadores
+        </router-link>
+      </div>
+
     </div>
   </div>
 </template>
@@ -94,6 +125,9 @@ export default {
       }
     },
     async playerSelected() {
+      console.log('Selected Player:', this.selectedPlayer);
+console.log('Similar Players:', this.similarPlayers);
+
       if (this.selectedPlayer) {
         await this.fetchSimilarPlayers(this.selectedPlayer.Id);
       } else {

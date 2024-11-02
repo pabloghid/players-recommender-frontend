@@ -18,7 +18,14 @@ const routes = [
     meta: { requiresAuth: true }
   },
   { path: '/my-list', component: () => import('./components/FavoritePlayers.vue'), meta: { requiresAuth: true }},
-  { path: '/graph', component: () => import('./components/RadarChart.vue'), meta: { requiresAuth: false }}
+  { path: '/graph', component: () => import('./components/RadarChart.vue'), meta: { requiresAuth: false }},
+  { 
+    path: '/comparison/:playerId1/:playerId2', 
+    name: 'PlayerComparison',
+    component: () => import('./components/PlayerComparision.vue'),
+    props: true, 
+    meta: { requiresAuth: false }
+  },
 ]
 const router = createRouter({
   history: createWebHistory(),

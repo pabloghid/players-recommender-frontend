@@ -58,6 +58,7 @@ export default {
   methods: {
     async fetchPlayerData() {
       try {
+        console.log(this.playerId1)
         const response1 = await getAPI.get(`core/players/${this.playerId1}`);
         const playerData1 = response1.data;
 
