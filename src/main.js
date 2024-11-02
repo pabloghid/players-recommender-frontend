@@ -18,6 +18,7 @@ const routes = [
     meta: { requiresAuth: true }
   },
   { path: '/my-list', component: () => import('./components/FavoritePlayers.vue'), meta: { requiresAuth: true }},
+  { path: '/graph', component: () => import('./components/RadarChart.vue'), meta: { requiresAuth: false }}
 ]
 const router = createRouter({
   history: createWebHistory(),
