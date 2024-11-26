@@ -49,7 +49,7 @@
 </template>
   
   <script>
-  import RadarChart from '@/components/ChartTest';
+  import RadarChart from '@/components/RadarChart';
   import { metricTranslations } from '@/utils/MetricTransaltions.js';
   import { getAPI } from '../../api-axios.js';
   

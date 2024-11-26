@@ -17,6 +17,9 @@
                         </div>
                         <button class="btn btn-dark w-100" type="submit">Login</button>
                     </form>
+                    <div v-if="errorMessage" class="alert alert-danger mb-3">
+                        {{ errorMessage }}
+                    </div>
                 </div>
             </div>
         </div>
@@ -33,6 +36,7 @@ export default {
             username: '',
             password: '',
             registrationSuccess: false,
+            errorMessage: ''
         }
     },
     methods: {
@@ -52,8 +56,16 @@ export default {
                     this.$router.push('/player-recommender')
                 })
                 .catch(error => {
-                    console.log(error)
-                })
+                if (error.response) {
+                    if (error.response.status === 400) {
+                        this.errorMessage = 'Usuário ou senha inválidos.';
+                    }
+                    else {
+                        this.errorMessage = 'Ocorreu um erro. Tente novamente mais tarde.';
+                    }
+                }
+            })
+                
         },
     },
     created() {

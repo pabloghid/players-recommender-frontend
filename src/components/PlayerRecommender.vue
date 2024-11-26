@@ -30,11 +30,13 @@
           <h2>Jogadores similares</h2>
           <hr>
           <div v-for="similar_player in similarPlayers" :key="similar_player.id"
-            class="comment mt-4 text-justify float-left">
-            <a class="list-group-item" :href="'/player/' + similar_player.id">
-              <img :src="similar_player.photo" alt="" class="rounded-circle" width="40" height="40">
-              <h5>{{ similar_player.name }}</h5>
-              <span>Equipe: {{ similar_player.team }}</span>
+            class="comment mt-4">
+            <a class="list-group-item d-flex align-items-center" :href="'/player/' + similar_player.id">
+              <img :src="similar_player.photo" alt="" class="rounded-circle mb-2" width="60" height="60">
+              <div class="flex-grow-1">
+                <h5>{{ similar_player.name }}</h5>
+                <span>Equipe: {{ similar_player.team }}</span>
+              </div>
 
               <router-link 
                 v-if="selectedPlayer && similarPlayers.length > 0" 
@@ -45,7 +47,7 @@
                     playerId2: similar_player.id 
                   } 
                 }" 
-                class="btn btn-primary"
+                class="btn btn-primary ms-auto"
               >
                 Comparar Jogadores
               </router-link>

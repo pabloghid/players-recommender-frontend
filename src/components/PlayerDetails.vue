@@ -11,7 +11,7 @@
                         <p class="card-text">País: {{ playerDetails.Nationality }}</p>
                         <p class="card-text">Peso: {{ playerDetails.Weight_kg }} kg</p>
                         <p class="card-text">Altura: {{ playerDetails.Height_cm }} m</p>
-                        <p class="card-text"><small class="text-muted">Liga: {{ playerDetails.player_league_name }}</small>
+                        <p class="card-text">Liga: {{ playerDetails.player_league_name }}
                         </p>
                     </div>
                 </div>
@@ -66,11 +66,9 @@
                                     <p class="card-text">Chutes: {{ playerDetails.Shots_Total }}</p>
                                     <p class="card-text">Chutes ao gol: {{ playerDetails.Shots_On }}</p>
                                     <p class="card-text">Chutes/jogo: {{ playerDetails.Shots }}</p>
-                                    <p class="card-text">Chutes ao gol/jogo: {{ playerDetails.ShotsOnTarget }}</p>
                                     <p class="card-text">Porcentagem de chutes ao gol: {{
                                         playerDetails.ShotsOnTarget_Percentage
                                     }}%</p>
-                                    <p class="card-text">Gols/chute: {{ playerDetails.Goals_Shot }}</p>
                                     <p class="card-text">Gols/chutes ao gol: {{ playerDetails.Goals_ShotsOnTarget }}</p>
                                 </div>
                             </div>
@@ -85,8 +83,6 @@
                                     <p class="card-text">Interceptações/jogo: {{ playerDetails.Interceptations }}</p>
                                     <p class="card-text">Desarmes: {{ playerDetails.Tackled_Total }}</p>
                                     <p class="card-text">Desarmes/jogo: {{ playerDetails.Tackles }}</p>
-                                    <p class="card-text">Desarmes e interceptações/jogo: {{
-                                        playerDetails.Tackles_Interceptations }}</p>
                                     <p class="card-text">Duelos ganhos: {{ playerDetails.Duels_Won }}</p>
                                     <p class="card-text">Total de duelos: {{ playerDetails.Duels_Total }}</p>
                                     <p class="card-text">Porcentagem de duelos ganhos: {{
