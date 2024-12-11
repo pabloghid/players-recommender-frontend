@@ -4,7 +4,9 @@
     
     <div class="row justify-content-center align-items-center mb-4">
       <div class="col text-center">
-        <img :src="player1.photo" alt="Foto do Jogador 1" class="rounded-circle img-thumbnail" style="width: 80px; height: 80px;">
+        <a :href="'/player/' + playerId1">
+          <img :src="player1.photo" alt="Foto do Jogador 1" class="rounded-circle img-thumbnail" style="width: 80px; height: 80px;">
+        </a>
         <h4 class="mt-2">{{ player1.name }}</h4>
       </div>
       
@@ -13,7 +15,9 @@
       </div>
       
       <div class="col text-center">
-        <img :src="player2.photo" alt="Foto do Jogador 2" class="rounded-circle img-thumbnail" style="width: 80px; height: 80px;">
+        <a :href="'/player/' + playerId2">
+          <img :src="player2.photo" alt="Foto do Jogador 2" class="rounded-circle img-thumbnail" style="width: 80px; height: 80px;">
+        </a>
         <h4 class="mt-2">{{ player2.name }}</h4>
       </div>
     </div>
